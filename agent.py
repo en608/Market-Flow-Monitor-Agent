@@ -5,19 +5,25 @@ ETF监控系统 - Agent 大脑层
 
 import logging
 import json
+import os
 from datetime import datetime
 from typing import Dict, Any, List, Callable
 
 from dotenv import load_dotenv
 import openai
 
+# 加载环境变量（指定 .env 文件路径）
+env_path = os.path.join(os.path.dirname(__file__), '.env')
+if os.path.exists(env_path):
+    load_dotenv(dotenv_path=env_path)
+else:
+    load_dotenv()
+
 from tools import (
     get_etf_realtime_data,
     get_etf_technical_indicators,
     get_future_index_data
 )
-
-load_dotenv()
 
 logging.basicConfig(
     level=logging.INFO,
@@ -201,14 +207,25 @@ class EtfAnalysisAgent:
         """初始化Agent"""
         logger.info("正在初始化ETF分析Agent...")
 
+        # 从环境变量读取配置
+        api_key = os.getenv("OPENAI_API_KEY")
+        base_url = os.getenv("OPENAI_API_BASE")
+        model_name = os.getenv("MODEL_NAME", "gpt-4o-mini")
+
+        if not api_key:
+            raise ValueError("OPENAI_API_KEY 未配置")
+        
+        if not base_url:
+            raise ValueError("OPENAI_API_BASE 未配置")
+
         self.client = openai.OpenAI(
-            api_key='fk239889-eUebfvTxbZDPjRb6mWOZqFHjlEn5tQ9O',
-            base_url='https://oa.api2d.net/v1',
+            api_key=api_key,
+            base_url=base_url,
             timeout=60,
             max_retries=2
         )
 
-        self.model = "gpt-4o-mini"
+        self.model = model_name
         self.temperature = 0.2
 
         logger.info(f"LLM初始化完成 (model={self.model}, temperature={self.temperature})")

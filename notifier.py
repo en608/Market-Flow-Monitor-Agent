@@ -137,5 +137,6 @@ if __name__ == "__main__":
         print("1. 请确保已关注 'WxPusher' 公众号")
         print("2. 请检查 .env 文件中的 UID 是否正确")
         print("3. 如果提示'未订阅应用'，请访问以下链接订阅:")
-        print("   https://wxpusher.zjiecode.com/demo/scan?appToken=AT_iWZj2eGT01i3E4c3pFONrEr1jOJQElZ4")
+        print("   https://wxpusher.zjiecode.com/demo/scan?appToken=YOUR_APP_TOKEN")
+        print("   (请在 .env 文件中查看 APP_TOKEN)")
         print("4. 如果还是收不到消息，请检查 WxPusher 后台的消息状态")
