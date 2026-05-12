@@ -1,0 +1,22 @@
+# ETF监控系统依赖库
+# 使用方法: pip install -r requirements.txt
+
+# 核心依赖
+efinance>=0.8.0
+langchain>=0.1.0
+langchain-core>=0.1.0
+langchain-openai>=0.1.0
+
+# 数据验证和类型提示
+pydantic>=2.0.0
+
+# 环境变量管理
+python-dotenv>=1.0.0
+
+# 定时任务调度
+APScheduler>=3.10.0
+
+# 微信推送（预留接口）
+# WxPusher - 微信推送服务
+# Server酱 - 微信推送服务
+# 当前阶段暂不需要，可根据第三阶段需求安装
