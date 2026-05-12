@@ -142,8 +142,10 @@ def get_etf_historical_data(symbol: str, count: int = 60) -> Optional[pd.DataFra
             return None
 
         df = pd.DataFrame(data)
-        df.columns = ['date', 'open', 'close', 'high', 'low', 'volume']
+        
+        df = df.rename(columns={'day': 'date'})
 
+        # 转换数据类型
         for col in ['open', 'close', 'high', 'low']:
             df[col] = pd.to_numeric(df[col], errors='coerce')
         df['volume'] = pd.to_numeric(df['volume'], errors='coerce').fillna(0).astype(int)
